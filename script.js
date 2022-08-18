@@ -22,7 +22,7 @@ Book.prototype.info = function(){
 }
 
 let shining = new Book("shining", "stephen", 200, "read")
-let notShining = new Book("notshining", "notstephen", 100, "not read")
+let notShining = new Book("notshining", "notstephen", 100, "not ")
 
 myLibrary = [shining, notShining]
 
