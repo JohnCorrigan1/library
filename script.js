@@ -27,20 +27,19 @@ let notShining = new Book("notshining", "notstephen", 100, "not ")
 myLibrary = [shining, notShining]
 
 const createCard = function(book){
-    const card = document.getElementById("card")
-    const title = document.getElementById("title1")
-    const author = document.getElementById("author1")
-    const pages = document.getElementById("page1")
-    const isRead = document.getElementById("readthis")
+    const list = document.getElementById("book-list")
+    const row = document.createElement('tr')
 
 
-    title.textContent = book.title
-    author.textContent = book.author
-    pages.textContent = book.pages
-    isRead.textContent = book.isRead
+    row.innerHTML = `
+    <td>${book.title}</td>
+    <td>${book.author}</td>
+    <td>${book.pages}</td>
+    <td>${book.isRead}</td>
+    <td>${book.title}</td>`;
 
+    list.appendChild(row)
 
-    
 }
 
 document.getElementById("submit").addEventListener("click", function(){
@@ -52,6 +51,8 @@ document.getElementById("submit").addEventListener("click", function(){
 //console.log(notShining.info())
 
 })
+
+
 
 
 
