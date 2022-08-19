@@ -24,34 +24,49 @@ Book.prototype.info = function(){
 let shining = new Book("shining", "stephen", 200, "read")
 let notShining = new Book("notshining", "notstephen", 100, "not ")
 
-myLibrary = [shining, notShining]
 
-const createCard = function(book){
+
+const createRow = function(book){
     const list = document.getElementById("book-list")
     const row = document.createElement('tr')
 
-
+    
     row.innerHTML = `
+    
     <td>${book.title}</td>
     <td>${book.author}</td>
     <td>${book.pages}</td>
     <td>${book.isRead}</td>
-    <td>${book.title}</td>`;
+    <td><button class="delete" type="submit" id="delete">Remove</td>`;
 
+    
     list.appendChild(row)
-
 }
 
-document.getElementById("submit").addEventListener("click", function(){
+createRow(shining)
+createRow(notShining)
+
+
+document.getElementById("submit").addEventListener("click", function(e){
+    e.preventDefault();
     const newBook = new Book(title.value, author.value, pages.value, isRead.value);
     console.log(newBook)
     myLibrary.push(newBook)
-    createCard(newBook);
-   
-//console.log(notShining.info())
-
+    createRow(newBook);
 })
 
+/*
+trying to delete
+
+const btns = document.querySelectorAll('button')
+
+btns.addEventListener("click", function(btns){
+    console.log("test")
+    if(btns.classList.contains('delete')){
+    btns.parentElement.remove();
+    }
+})
+*/
 
 
 
