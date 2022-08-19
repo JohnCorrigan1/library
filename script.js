@@ -7,7 +7,10 @@ function Book(title, author, pages, isRead){
     this.author = author,
     this.pages = pages,
     this.isRead = isRead
+    this.onPage = false;
 }
+
+    
 //add book function
 function addBookToLibrary(){
     const title = document.getElementById("title").value;
@@ -24,51 +27,69 @@ Book.prototype.info = function(){
 let shining = new Book("shining", "stephen", 200, "read")
 let notShining = new Book("notshining", "notstephen", 100, "not ")
 
+myLibrary = [shining, notShining]
 
+const list = document.getElementById("book-list")
 
-const createRow = function(book){
-    const list = document.getElementById("book-list")
+const createRow = function(book, position){
+    
     const row = document.createElement('tr')
+    row.dataset.position = position;
 
     
     row.innerHTML = `
     
-    <td>${book.title}</td>
+    <td data-position="${position}">${book.title}</td>
     <td>${book.author}</td>
     <td>${book.pages}</td>
     <td>${book.isRead}</td>
-    <td><button class="delete" type="submit" id="delete">Remove</td>`;
+    <td><button class="delete" type="submit">Remove</td>`;
 
     
     list.appendChild(row)
 }
 
-createRow(shining)
-createRow(notShining)
+function clear(){
+   document.getElementById("title").value = ''
+   document.getElementById("author").value = ''
+   document.getElementById("pages").value = ''
+}
 
 
 document.getElementById("submit").addEventListener("click", function(e){
     e.preventDefault();
+    if(title.value != '' && author.value != ''){
     const newBook = new Book(title.value, author.value, pages.value, isRead.value);
-    console.log(newBook)
     myLibrary.push(newBook)
-    createRow(newBook);
-})
+    displayBooks();
 
-/*
-trying to delete
-
-const btns = document.querySelectorAll('button')
-
-btns.addEventListener("click", function(btns){
-    console.log("test")
-    if(btns.classList.contains('delete')){
-    btns.parentElement.remove();
+    //createRow(newBook);
+    clear();
     }
 })
-*/
+
+
+//iterates through library array and displays books that aren't displayed
+function displayBooks(){
+    for(i = 0; i < myLibrary.length; i++){
+        if(!myLibrary[i].onPage){
+            createRow(myLibrary[i], i)
+            myLibrary[i].onPage = true;
+        }
+    }
+}
 
 
 
+//deletes row of book
+list.addEventListener("click", e => {
+    if(e.target.classList.contains('delete')){
+        e.target.parentElement.parentElement.remove();
+        myLibrary.splice(e.target.parentElement.parentElement.dataset.position, 1)
+        displayBooks();
+    }
+})
 
 
+
+displayBooks();
