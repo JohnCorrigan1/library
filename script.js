@@ -1,8 +1,9 @@
 //book library array
-let myLibrary = [];
+
+class Book{
 
 //new book constructor
-function Book(title, author, pages, isRead){
+constructor (title, author, pages, isRead){
     this.title = title,
     this.author = author,
     this.pages = pages,
@@ -10,15 +11,17 @@ function Book(title, author, pages, isRead){
     this.onPage = false;
 }
 
+
+}
 //intitialize array
 let shining = new Book("shining", "stephen", 200, "Read")
 let notShining = new Book("notshining", "notstephen", 100, "Not Read")
-
+let myLibrary = [];
 myLibrary = [shining, notShining]
-
 const list = document.getElementById("book-list")
 
-const createRow = function(book, position) {    
+// class Display  {
+ createRow = function(book, position) {    
     const row = document.createElement('tr')
     row.dataset.position = position;
 
@@ -34,11 +37,24 @@ const createRow = function(book, position) {
 }
 
 //clears form called after new book is added
-function clear(){
+clear = function(){
    document.getElementById("title").value = ''
    document.getElementById("author").value = ''
    document.getElementById("pages").value = ''
    document.getElementById("isRead").value = "Read"
+}
+
+
+
+
+//iterates through library array and displays books that aren't displayed
+function displayBooks(){
+    for(i = 0; i < myLibrary.length; i++){
+        if(!myLibrary[i].onPage){
+            createRow(myLibrary[i], i)
+            myLibrary[i].onPage = true;
+        }       
+    }
 }
 
 //adds new book to table and library array
@@ -51,17 +67,6 @@ document.getElementById("submit").addEventListener("click", function(e){
     clear();
     }
 })
-
-
-//iterates through library array and displays books that aren't displayed
-function displayBooks(){
-    for(i = 0; i < myLibrary.length; i++){
-        if(!myLibrary[i].onPage){
-            createRow(myLibrary[i], i)
-            myLibrary[i].onPage = true;
-        }       
-    }
-}
 
 //deletes row of book
 list.addEventListener("click", e => {

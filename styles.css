@@ -82,3 +82,33 @@ button:hover {
     color: #E7F6F2;
     padding: 10px;
 }
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 5px;
+    width: 100%;
+}
+
+.footer {
+    margin-right: 5px;
+}
+
+.github-logo:hover{
+    animation: roll 3s;
+    
+    transform: rotate(720deg) ;
+}
+
+@keyframes roll {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(720deg)
+    }
+    
+}
